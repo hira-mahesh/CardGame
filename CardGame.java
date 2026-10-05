@@ -6,7 +6,7 @@ public class CardGame {
         Scanner scanner = new Scanner(System.in); //scanner class
         System.out.print("Enter the number of players: "); 
         int numberOfPlayers = scanner.nextInt();//inputting players4
-    
+        makePlayers(numberOfPlayers);
         System.out.print("Enter the location of pack to load: ");
         String packLocation = scanner.next();
         
@@ -45,4 +45,13 @@ public class CardGame {
         return true;
     }
 
+    public static void makePlayers(int numberOfPlayers)
+    {
+        Player[] players = new Player[numberOfPlayers];
+        for(int i=0;i<numberOfPlayers;i++)
+            {
+                players[i] = new Player(i);
+            }
+
+    }
 }
