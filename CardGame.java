@@ -12,8 +12,8 @@ public class CardGame {
         String packLocation = scanner.next();
         
         while (!checkValid(packLocation)) {
-            System.out.print("Invalid file ");
-            System.out.print("Enter the location of pack to load: ");
+            System.out.println("Invalid file ");
+            System.out.println("Enter the location of pack to load: ");
             packLocation = scanner.next();
         }
         scanner.close();
@@ -22,24 +22,19 @@ public class CardGame {
     public static boolean checkValid(String packLocation){
         File pack = new File(packLocation);
         
-        // scannerclosed automatically
+        // scanner closed automatically
         try (Scanner myReader = new Scanner(pack)) {
             int lineCount = 0;
             while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                            
+                String data = myReader.nextLine().trim();
+                //regex to make sure there only a single number on the line and theres no negatives
                 if (!data.matches("\\d+")) {
-                myReader.close();
-                return false;
-            }
-                int number = Integer.parseInt(data);
-                if (number < 0) {
                     return false;
-                }
-                lineCount++;
+                 }
+                lineCount++; //updates count of lines
             }
 
-            if (lineCount % 8 != 0) {
+            if (lineCount % 8 != 0) { // makes sure line count is 8n
             return false;
          }
         } 
