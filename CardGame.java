@@ -45,13 +45,12 @@ public class CardGame {
         return true;
     }
 
-    public static void makePlayers(int numberOfPlayers)
+    public static Player[] makePlayers(int numberOfPlayers)
     {
         Player[] players = new Player[numberOfPlayers];
-        for(int i=0;i<numberOfPlayers;i++)
-            {
-                players[i] = new Player(i);
-            }
-
+        for (int i = 0; i < numberOfPlayers; i++) {
+            players[i] = new Player(i + 1);
+        }
+        return players;
     }
 }

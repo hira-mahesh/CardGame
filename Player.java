@@ -1,11 +1,14 @@
 public class Player {
     int playerNum;
     private String name;
-    public Player(int playerNum){
+    public Player(int playerNum) {
         this.playerNum = playerNum;
         this.name = "Player " + playerNum;
     }
     public String getName() {
         return name;
+    }
+    public int getPlayerNum() {
+        return playerNum;
     }
 }
