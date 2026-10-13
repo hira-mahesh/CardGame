@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -5,13 +6,8 @@ public class CardGame {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in); //scanner class
         System.out.print("Enter the number of players: "); 
-<<<<<<< HEAD
         int numberOfPlayers = scanner.nextInt();//inputting players4
         makePlayers(numberOfPlayers);
-=======
-        int n = scanner.nextInt();//inputting players4
-    
->>>>>>> 80a2e59 (add final class files)
         System.out.print("Enter the location of pack to load: ");
         String packLocation = scanner.next();
         
@@ -58,4 +54,7 @@ public class CardGame {
         }
         return players;
     }
+
+    
 }
+

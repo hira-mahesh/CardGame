@@ -5,6 +5,7 @@ public class Player {
     public Player(int playerNum) {
         this.playerNum = playerNum;
         this.name = "Player " + playerNum;
+        this.hand = new int[4];
     }
     public String getName() {
         return name;
