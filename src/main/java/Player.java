@@ -2,6 +2,7 @@ public class Player {
     private int playerNum;
     private int[] hand;
     private String name;
+    private int cardsInHand = 0;
     public Player(int playerNum) {
         this.playerNum = playerNum;
         this.name = "Player " + playerNum;
@@ -15,5 +16,9 @@ public class Player {
     }
     public int[] getHand() {
         return hand;
+    }
+    public void addCard(int card) {
+        hand[cardsInHand] = card;
+        cardsInHand++;
     }
 }

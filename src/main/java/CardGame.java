@@ -17,6 +17,15 @@ public class CardGame {
             packLocation = scanner.next();
         }
         scanner.close();
+        Player[] players = makePlayers(numberOfPlayers);
+        distributeCards(players, packLocation);
+        for (Player player : players) {
+    System.out.println(player.getName() + "'s hand:");
+
+    for (int card : player.getHand()) {
+        System.out.println(card);
+    }
+}
     }
 
     public static boolean checkValid(String packLocation){
@@ -55,6 +64,20 @@ public class CardGame {
         return players;
     }
 
-    
+    public static void distributeCards(Player[] players, String packLocation){
+        File pack = new File(packLocation);
+        try (Scanner packScanner = new Scanner(pack)) {
+             for (int round = 0; round < 4; round++) { // outer loop deals 4 rounds of cards
+                for (int i = 0; i < players.length; i++) {// inner loop gives one card to each player per round
+                    int card = Integer.parseInt(packScanner.nextLine().trim()); // reads  next line from the file
+                    players[i].addCard(card); // removes the spaces around and changes to integer
+                }
+             }
+            
+        } catch (FileNotFoundException e) {
+             System.out.println("Pack not found.");
+        }
+
+    }
 }
 
