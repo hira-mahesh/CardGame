@@ -4,106 +4,125 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 public class CardGame {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in); //scanner class
-        System.out.print("Enter the number of players: "); 
-        int numberOfPlayers = scanner.nextInt();//inputting players4
-        makePlayers(numberOfPlayers);
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of players: ");
+        int numberOfPlayers = scanner.nextInt();
+        scanner.nextLine(); 
         System.out.print("Enter the location of pack to load: ");
-        String packLocation = scanner.next();
-        
-        while (!checkValid(packLocation)) {
-            System.out.println("Invalid file ");
-            System.out.println("Enter the location of pack to load: ");
-            packLocation = scanner.next();
+        String packLocation = scanner.nextLine().trim();
+        while (!checkValid(packLocation, numberOfPlayers)) {
+            System.out.println("Invalid file.");
+            System.out.print("Enter the location of pack to load: ");
+            packLocation = scanner.nextLine().trim();
         }
         scanner.close();
         Player[] players = makePlayers(numberOfPlayers);
-        CardDeck[] decks = createDecks(numberOfPlayers);
+        cardDeck[] decks = createDecks(numberOfPlayers);
         distributeCards(players, packLocation);
-        // for (Player player : players) {
-        //      System.out.println(player.getName() + "'s hand:");
-        //     for (int card : player.getHand()) {
-        //         System.out.println(card);
-        //     }
-        // }
-    }
+        distributeDecks(decks, packLocation);
+        // Print each player's hand
+        for (Player player : players) {
+            System.out.println(player.getName() + "'s hand:");
 
-    public static boolean checkValid(String packLocation){
+            for (Card card : player.getHand()) {
+                if (card != null) {
+                    System.out.println(card.getValue());
+                }
+            }
+            System.out.println();
+        }
+        // Print each deck
+        for (cardDeck deck : decks) {
+            System.out.println("Deck " + deck.getdeckNum() + ":");
+
+            while (!deck.isEmpty()) {
+                Card card = deck.drawTop();
+                System.out.println(card.getValue());
+            }
+            System.out.println();
+        }
+    }
+    public static boolean checkValid(
+            String packLocation, int numberOfPlayers) {
+        if (numberOfPlayers <= 0) {
+            return false;
+        }
         File pack = new File(packLocation);
-        
-        // scanner closed automatically
+        System.out.println("Checking path: " + pack.getAbsolutePath());
+        System.out.println("File exists: " + pack.exists());
+        System.out.println("Is a file: " + pack.isFile());
         try (Scanner myReader = new Scanner(pack)) {
             int lineCount = 0;
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine().trim();
-                //regex to make sure there only a single number on the line and theres no negatives
+
+                // Each line must contain one non-negative integer
                 if (!data.matches("\\d+")) {
                     return false;
-                 }
-                lineCount++; //updates count of lines
+                }
+                lineCount++;
             }
-
-            if (lineCount % 8 != 0) { // makes sure line count is 8n
-            return false;
-         }
-        } 
-        catch (FileNotFoundException e) {
+            // Exactly eight cards per player
+            return lineCount == 8 * numberOfPlayers;
+        } catch (FileNotFoundException e) {
             return false;
         }
-
-    
-        return true;
     }
-
-    public static Player[] makePlayers(int numberOfPlayers)
-    {
+    public static Player[] makePlayers(int numberOfPlayers) {
         Player[] players = new Player[numberOfPlayers];
         for (int i = 0; i < numberOfPlayers; i++) {
             players[i] = new Player(i + 1);
         }
         return players;
     }
-
-    public static void distributeHands(Player[] players, String packLocation){
+    public static cardDeck[] createDecks(int numberOfPlayers) {
+        cardDeck[] decks = new cardDeck[numberOfPlayers];
+        for (int i = 0; i < numberOfPlayers; i++) {
+            decks[i] = new cardDeck(i + 1);
+        }
+        return decks;
+    }
+    public static void distributeCards(
+            Player[] players, String packLocation) {
         File pack = new File(packLocation);
         try (Scanner packScanner = new Scanner(pack)) {
-             for (int round = 0; round < 4; round++) { // outer loop deals 4 rounds of cards
-                for (int i = 0; i < players.length; i++) {// inner loop gives one card to each player per round
-                    int cardValue = Integer.parseInt(packScanner.nextLine().trim()); // reads  next line from the file
-                    Card card = new Card(cardValue); //makes card object
-                    players[i].addCard(card); // removes the spaces around and changes to integer
+            // Deal four cards to each player
+            for (int round = 0; round < 4; round++) {
+                for (int i = 0; i < players.length; i++) {
+                    int cardValue =
+                            Integer.parseInt(packScanner.nextLine().trim());
+                    Card card = new Card(cardValue);
+                    players[i].addCard(card);
                 }
-             }
-            
-        } catch (FileNotFoundException e) {
-             System.out.println("Pack not found.");
-        }
+            }
 
+        } catch (FileNotFoundException e) {
+            System.out.println("Pack not found.");
+        }
     }
 
-    public static void distributeDecks(CardDeck[] decks, String packLocation){
+    public static void distributeDecks(
+        cardDeck[] decks, String packLocation) {
         File pack = new File(packLocation);
         try (Scanner packScanner = new Scanner(pack)) {
-            // skipping cards delt to the players
             int numberOfPlayers = decks.length;
+            // Skip the cards already dealt to the players
             for (int i = 0; i < numberOfPlayers * 4; i++) {
-            packScanner.nextLine();
+                packScanner.nextLine();
             }
-            
-            while (packScanner.hasNextLine()) { // while there are still cards in the pack
-                int cardValue = Integer.parseInt(packScanner.nextLine().trim()); //reads  next line from the file
-                Card card = new Card(cardValue); //makes card object
-                decks[deckIndex].addCard(card); // add one card to the current deck
-                deckIndex++; //moves to next deck
-                if (deckIndex == decks.length) { // check if last deck is reached
-                    deckIndex = 0; // circle to first deck
+            int deckIndex = 0;
+            // Distribute remaining cards among the decks
+            while (packScanner.hasNextLine()) {
+                int cardValue = Integer.parseInt(packScanner.nextLine().trim());
+                Card card = new Card(cardValue);
+                decks[deckIndex].addBottom(card);
+                deckIndex++;
+                if (deckIndex == decks.length) {
+                    deckIndex = 0;
                 }
             }
-            
         } catch (FileNotFoundException e) {
-             System.out.println("Pack not found.");
+            System.out.println("Pack not found.");
         }
-
     }
 }
-
