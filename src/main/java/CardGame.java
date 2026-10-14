@@ -69,7 +69,8 @@ public class CardGame {
         try (Scanner packScanner = new Scanner(pack)) {
              for (int round = 0; round < 4; round++) { // outer loop deals 4 rounds of cards
                 for (int i = 0; i < players.length; i++) {// inner loop gives one card to each player per round
-                    int card = Integer.parseInt(packScanner.nextLine().trim()); // reads  next line from the file
+                    int cardValue = Integer.parseInt(packScanner.nextLine().trim()); // reads  next line from the file
+                    Card card = new Card(cardValue); //makes card object
                     players[i].addCard(card); // removes the spaces around and changes to integer
                 }
              }
