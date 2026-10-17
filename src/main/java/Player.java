@@ -112,6 +112,10 @@ public class Player extends Thread{
             System.out.println( "player " + playerNum + " discards a " + discardedCard.getValue() + " to deck " + deckToAddTo.getdeckNum());
             //prints hand
             System.out.println("player " + playerNum + " current hand is " + getHandString());
+            if (hasWon()) {
+                declareWin();
+                return;
+            }
         // pauses  after each complete turn
         try {
             Thread.sleep(1000);
@@ -121,10 +125,7 @@ public class Player extends Thread{
         }
             // check if player has won
 
-            if (hasWon()) {
-                declareWin();
-                return;
-            }
+            
         }
     }
 
