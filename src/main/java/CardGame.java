@@ -147,9 +147,9 @@ public class CardGame {
 
         for (int i = 0; i < players.length; i++) {
             // deck to players left
-            int leftDeck = (i + 1) % decks.length;
+            int leftDeck = i;
             // deck to players right
-            int rightDeck = i;
+            int rightDeck = (i + 1) % decks.length;
             //assign deck to player
             players[i].setDecks(decks[leftDeck], decks[rightDeck]);
         }
