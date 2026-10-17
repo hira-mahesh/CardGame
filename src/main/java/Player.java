@@ -78,9 +78,40 @@ public class Player extends Thread{
                 return discardedCard; //returns discarded card to add to deck
             }
         }
-
         //no card to be replaced found
         return newCard;
+    }
+
+        public void turn() {
+            Card drawnCard = deckToDrawFrom.drawTop();
+
+            if (drawnCard == null) {
+            Thread.yield();
+            return;
+        }
+
+        Card discardedCard = replaceCard(drawnCard);
+        deckToAddTo.addBottom(discardedCard);
+
+        System.out.println("player " + playerNum
+                + " draws a " + drawnCard.getValue()
+                + " from deck " + deckToDrawFrom.getdeckNum()
+                + " and discards a " + discardedCard.getValue()
+                + " to deck " + deckToAddTo.getdeckNum());
+
+        System.out.println("player " + playerNum
+                + " current hand is " + getHandString());
+
+        if (hasWon()) {
+            declareWin();
+            return;
+        }
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
     @Override
     public void run() {
@@ -91,42 +122,10 @@ public class Player extends Thread{
         }
 
         // keeps playing until a player has won
-        while (!gameOver) {
-            //draws a card from the left
-            Card drawnCard = deckToDrawFrom.drawTop();
-
-            // if deck is empty try again
-            if (drawnCard == null) {
-                Thread.yield();
-                continue;
-            }
-            //print move 
-            System.out.println( "player " + playerNum + " draws a "+ drawnCard.getValue()+ " from deck " + deckToDrawFrom.getdeckNum());
-            
-            // replace card in hand
-            Card discardedCard = replaceCard(drawnCard);
-
-            // put discarded card in bottom of right pile
-            deckToAddTo.addBottom(discardedCard);
-            //print discarding move
-            System.out.println( "player " + playerNum + " discards a " + discardedCard.getValue() + " to deck " + deckToAddTo.getdeckNum());
-            //prints hand
-            System.out.println("player " + playerNum + " current hand is " + getHandString());
-            if (hasWon()) {
-                declareWin();
-                return;
-            }
-        // pauses  after each complete turn
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            return;
+        while (!gameOver && !Thread.currentThread().isInterrupted()) {
+        turn();
         }
-            // check if player has won
 
-            
-        }
     }
 
     // announces winner and stops game
