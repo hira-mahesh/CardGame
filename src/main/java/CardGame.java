@@ -6,11 +6,11 @@ public class CardGame {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the number of players: ");
-        int numberOfPlayers = scanner.nextInt();
+        int numberOfPlayers = checkValidPlayerNum(scanner);
         scanner.nextLine(); 
         System.out.print("Enter the location of pack to load: ");
         String packLocation = scanner.nextLine().trim();
-        while (!checkValid(packLocation, numberOfPlayers)) {
+        while (!checkValidFile(packLocation, numberOfPlayers)) {
             System.out.println("Invalid file.");
             System.out.print("Enter the location of pack to load: ");
             packLocation = scanner.nextLine().trim();
@@ -62,7 +62,24 @@ public class CardGame {
         }
         scanner.close(); //close the scanner
     }
-    public static boolean checkValid(
+    public static int checkValidPlayerNum(Scanner scanner) {
+        while (true) {
+            System.out.print("Enter the number of players: ");
+
+            if (scanner.hasNextInt()) {
+                int numberOfPlayers = scanner.nextInt();
+
+                if (numberOfPlayers > 0) {
+                    return numberOfPlayers;
+                }
+            } else {
+                scanner.next(); // Removes invalid input
+            }
+
+            System.out.println("Invalid number of players. Please try again.");
+        }
+    }
+    public static boolean checkValidFile(
             String packLocation, int numberOfPlayers) {
         if (numberOfPlayers <= 0) {
             return false;
