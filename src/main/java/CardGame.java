@@ -17,7 +17,7 @@ public class CardGame {
         }
         scanner.close();
         Player[] players = makePlayers(numberOfPlayers);
-        cardDeck[] decks = createDecks(numberOfPlayers);
+        CardDeck[] decks = createDecks(numberOfPlayers);
         distributeCards(players, packLocation);
         distributeDecks(decks, packLocation);
         // Print each player's hand
@@ -32,7 +32,7 @@ public class CardGame {
             System.out.println();
         }
         // Print each deck
-        for (cardDeck deck : decks) {
+        for (CardDeck deck : decks) {
             System.out.println("Deck " + deck.getdeckNum() + ":");
 
             while (!deck.isEmpty()) {
@@ -48,9 +48,7 @@ public class CardGame {
             return false;
         }
         File pack = new File(packLocation);
-        System.out.println("Checking path: " + pack.getAbsolutePath());
-        System.out.println("File exists: " + pack.exists());
-        System.out.println("Is a file: " + pack.isFile());
+
         try (Scanner myReader = new Scanner(pack)) {
             int lineCount = 0;
             while (myReader.hasNextLine()) {
@@ -75,10 +73,10 @@ public class CardGame {
         }
         return players;
     }
-    public static cardDeck[] createDecks(int numberOfPlayers) {
-        cardDeck[] decks = new cardDeck[numberOfPlayers];
+    public static CardDeck[] createDecks(int numberOfPlayers) {
+        CardDeck[] decks = new CardDeck[numberOfPlayers];
         for (int i = 0; i < numberOfPlayers; i++) {
-            decks[i] = new cardDeck(i + 1);
+            decks[i] = new CardDeck(i + 1);
         }
         return decks;
     }
@@ -102,7 +100,7 @@ public class CardGame {
     }
 
     public static void distributeDecks(
-        cardDeck[] decks, String packLocation) {
+        CardDeck[] decks, String packLocation) {
         File pack = new File(packLocation);
         try (Scanner packScanner = new Scanner(pack)) {
             int numberOfPlayers = decks.length;

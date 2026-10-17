@@ -2,11 +2,11 @@
 import java.util.Deque;
 import java.util.ArrayDeque;
 
-public class cardDeck {
+public class CardDeck {
     private final int deckNum;
     private final Deque<Card> cards;
 
-    public cardDeck(int deckNum) { // constructor creating new deck
+    public CardDeck(int deckNum) { // constructor creating new deck
         this.deckNum = deckNum;
         this.cards = new ArrayDeque<>();
     }
