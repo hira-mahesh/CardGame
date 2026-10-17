@@ -3,8 +3,8 @@ public class Player extends Thread{
     private int playerNum;
     private Card[] hand;
     private int cardsInHand;
-    private cardDeck deckToDrawFrom;
-    private cardDeck deckToAddTo;
+    private CardDeck deckToDrawFrom;
+    private CardDeck deckToAddTo;
 
     // shared flag ; alerts other threads when one player wins
     private static volatile boolean gameOver = false;
@@ -48,7 +48,7 @@ public class Player extends Thread{
         return handToString();
     }
 
-    public void setDecks(cardDeck deckToDrawFrom, cardDeck deckToAddTo){//tells player which deck to use
+    public void setDecks(CardDeck deckToDrawFrom, CardDeck deckToAddTo){//tells player which deck to use
         this.deckToDrawFrom = deckToDrawFrom; // stores draw deck in player field
         this.deckToAddTo = deckToAddTo; // stores add deck in player field
     }
@@ -69,17 +69,18 @@ public class Player extends Thread{
     }
 
     //replacing a card in a hand
-    private synchronized Card replaceCard(Card newCard){
-        for (int i = 0; i < hand.length; i++){
-            //discards card that isnt preferred value
-            if (hand[i].getValue() != playerNum){
-                Card discardedCard = hand[i]; // saves reference to old card
+     private synchronized Card replaceCard(Card newCard) {
+        for (int i = 0; i < hand.length; i++) {
+            // discards card thats not preferred value
+            if (hand[i].getValue() != playerNum) {
+                Card discardedCard = hand[i];//saves reference to old card to return 
                 hand[i] = newCard; //adds new card in position
-                return discardedCard; 
+                return discardedCard; //returns discarded card to add to deck
             }
         }
+
         //no card to be replaced found
-        return newCard();
+        return newCard;
     }
     @Override
     public void run() {

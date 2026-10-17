@@ -15,11 +15,13 @@ public class CardGame {
             System.out.print("Enter the location of pack to load: ");
             packLocation = scanner.nextLine().trim();
         }
-        scanner.close();
-        Player[] players = makePlayers(numberOfPlayers);
-        CardDeck[] decks = createDecks(numberOfPlayers);
-        distributeCards(players, packLocation);
-        distributeDecks(decks, packLocation);
+        
+        Player[] players = makePlayers(numberOfPlayers); //create players
+        CardDeck[] decks = createDecks(numberOfPlayers); //create decks
+        distributeCards(players, packLocation); //distribute cards
+        distributeDecks(decks, packLocation); //distribute decks
+        assignDecks(players, decks); //assign right and left deck to player
+
         // Print each player's hand
         for (Player player : players) {
             System.out.println(player.getName() + "'s hand:");
@@ -32,15 +34,33 @@ public class CardGame {
             System.out.println();
         }
         // Print each deck
-        for (CardDeck deck : decks) {
-            System.out.println("Deck " + deck.getdeckNum() + ":");
+        // for (CardDeck deck : decks) {
+        //     System.out.println("Deck " + deck.getdeckNum() + ":");
 
-            while (!deck.isEmpty()) {
-                Card card = deck.drawTop();
-                System.out.println(card.getValue());
+        //     while (!deck.isEmpty()) {
+        //         Card card = deck.drawTop();
+        //         System.out.println(card.getValue());
+        //     }
+        //     System.out.println();
+        // }
+
+        //reset game status shared flag
+        Player.resetGame();
+        for (Player player : players) {  // start all the player threads
+            player.start();
+        }  
+
+        
+        // wait for player threads to finish
+        for (Player player : players) {
+            try {
+                player.join();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
             }
-            System.out.println();
         }
+        scanner.close(); //close the scanner
     }
     public static boolean checkValid(
             String packLocation, int numberOfPlayers) {
@@ -99,8 +119,7 @@ public class CardGame {
         }
     }
 
-    public static void distributeDecks(
-        CardDeck[] decks, String packLocation) {
+    public static void distributeDecks( CardDeck[] decks, String packLocation) {
         File pack = new File(packLocation);
         try (Scanner packScanner = new Scanner(pack)) {
             int numberOfPlayers = decks.length;
@@ -121,6 +140,18 @@ public class CardGame {
             }
         } catch (FileNotFoundException e) {
             System.out.println("Pack not found.");
+        }
+    }
+
+    public static void assignDecks(Player[] players, CardDeck[] decks) {
+
+        for (int i = 0; i < players.length; i++) {
+            // deck to players left
+            int leftDeck = (i + 1) % decks.length;
+            // deck to players right
+            int rightDeck = i;
+            //assign deck to player
+            players[i].setDecks(decks[leftDeck], decks[rightDeck]);
         }
     }
 }
