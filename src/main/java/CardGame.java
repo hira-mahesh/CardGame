@@ -63,6 +63,9 @@ public class CardGame {
                 break;
             }
         }
+        for(CardDeck deck : decks) { //writes the final state of the decks to files
+            deck.writeDeckToFile();
+        }
         scanner.close(); //close the scanner
     }
     public static int checkValidPlayerNum(Scanner scanner) {
