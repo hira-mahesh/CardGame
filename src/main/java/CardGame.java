@@ -2,6 +2,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
 public class CardGame {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -18,6 +19,9 @@ public class CardGame {
         Player[] players = makePlayers(numberOfPlayers); //create players
         CardDeck[] decks = createDecks(numberOfPlayers); //create decks
         distributeCards(players, packLocation); //distribute cards
+        for (Player player : players) { //writes the starting hand to the file
+            player.writeInitialHand();
+        }
         distributeDecks(decks, packLocation); //distribute decks
         assignDecks(players, decks); //assign right and left deck to player
 

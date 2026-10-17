@@ -2,6 +2,9 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Player extends Thread{
     private int playerNum;
@@ -9,6 +12,7 @@ public class Player extends Thread{
     private int cardsInHand;
     private CardDeck deckToDrawFrom;
     private CardDeck deckToAddTo;
+    private PrintWriter outputFile;
 
     // shared flag ; alerts other threads when one player wins
     private static volatile boolean gameOver = false;
@@ -18,6 +22,12 @@ public class Player extends Thread{
         this.playerNum = playerNum;
         this.hand = new Card[4]; // Makes hand array of 4
         this.cardsInHand = 0; //player starts with 0 cards before dealt
+
+        try { //names files
+            outputFile = new PrintWriter( new FileWriter("player" + playerNum + "_output.txt"));
+        } catch (IOException e) {
+            throw new RuntimeException("Could not create player output file.", e);
+        }
     }
 
     public int getPlayerNum() { //getter method
@@ -97,21 +107,22 @@ public class Player extends Thread{
      
     }
 
-        public void turn() {
-            Card drawnCard = deckToDrawFrom.drawTop();
+    public void turn() {
+        Card drawnCard = deckToDrawFrom.drawTop();
 
-            if (drawnCard == null) {
+        if (drawnCard == null) {
             Thread.yield();
             return;
         }
 
         Card discardedCard = replaceCard(drawnCard);
         deckToAddTo.addBottom(discardedCard);
-
-        System.out.println("player " + playerNum
-                + " draws a " + drawnCard.getValue()
-                + " from deck " + deckToDrawFrom.getdeckNum()
-                + " and discards a " + discardedCard.getValue()
+        // Write the draw , discard and current hand to the file
+        outputFile.println("player " + playerNum + " draws a " + drawnCard.getValue()  + " from deck " + deckToDrawFrom.getdeckNum());
+        outputFile.println("player " + playerNum + " discards a " + discardedCard.getValue() + " to deck " + deckToAddTo.getdeckNum());
+        outputFile.println("player " + playerNum + " current hand is " + getHandString());
+        outputFile.flush(); // writes to file immediatly
+        System.out.println("player " + playerNum + " draws a " + drawnCard.getValue()  + " from deck " + deckToDrawFrom.getdeckNum()  + " and discards a " + discardedCard.getValue()
                 + " to deck " + deckToAddTo.getdeckNum());
 
         System.out.println("player " + playerNum
@@ -128,6 +139,11 @@ public class Player extends Thread{
             Thread.currentThread().interrupt();
         }
     }
+    
+    public void writeInitialHand() {
+        outputFile.println("player " + playerNum + " initial hand " + getHandString());
+        outputFile.flush();
+        }
     @Override
     public void run() {
         //checks for a starting win
