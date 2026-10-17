@@ -70,16 +70,27 @@ public class Player extends Thread{
 
     //replacing a card in a hand
      private synchronized Card replaceCard(Card newCard) {
+        List<integer> options = new ArrayList<>(); //array of all the non preferred cards
         for (int i = 0; i < hand.length; i++) {
             // discards card thats not preferred value
             if (hand[i].getValue() != playerNum) {
-                Card discardedCard = hand[i];//saves reference to old card to return 
-                hand[i] = newCard; //adds new card in position
-                return discardedCard; //returns discarded card to add to deck
+                // Card discardedCard = hand[i];//saves reference to old card to return 
+                // hand[i] = newCard; //adds new card in position
+                // return discardedCard; //returns discarded card to add to deck
+                options.add(i);
             }
+
+           
         }
-        //no card to be replaced found
-        return newCard;
+        if(options.isEmpty())
+                {
+                    return newCard;
+                }
+        int i = options.get(ThreadLocalRandom.current().nextInt(options.size())); //getting randnom from list
+        Card discardedCard = hand[i];//saves reference to old card to return 
+        hand[i] = newCard; //adds new card in position
+        return discardedCard; //returns discarded card to add to deck
+     
     }
 
         public void turn() {
