@@ -70,7 +70,7 @@ public class Player extends Thread{
 
     //replacing a card in a hand
      private synchronized Card replaceCard(Card newCard) {
-        List<integer> options = new ArrayList<>(); //array of all the non preferred cards
+        List<Integer> options = new ArrayList<>(); //array of all the non preferred cards
         for (int i = 0; i < hand.length; i++) {
             // discards card thats not preferred value
             if (hand[i].getValue() != playerNum) {
