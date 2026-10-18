@@ -38,6 +38,7 @@ public class CardDeck {
         String fileName = "deck" + deckNum + ".txt";
         try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
             writer.print("deck " + deckNum + " contents:");
+            
             for (Card card : cards) {
                 writer.print(" " + card.getValue());
             }
@@ -45,4 +46,21 @@ public class CardDeck {
             System.err.println("Error writing to file: " + e.getMessage());
         }
     }
+
+    
+    @Override
+    public synchronized String toString() {
+        StringBuilder deckContents = new StringBuilder();
+
+        for (Card card : cards) {
+            if (deckContents.length() > 0) {
+                deckContents.append(" ");
+            }
+
+            deckContents.append(card.getValue());
+        }
+
+        return deckContents.toString();
+    }
+
 }

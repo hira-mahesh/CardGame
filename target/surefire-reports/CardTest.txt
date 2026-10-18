@@ -1,12 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: CardTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 22, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 1.934 s <<< FAILURE! -- in CardTest
-=======
-Tests run: 22, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 1.807 s <<< FAILURE! -- in CardTest
->>>>>>> 420deec (run tets)
-CardTest.checkOutputTxt -- Time elapsed: 0.023 s <<< FAILURE!
+Tests run: 22, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 2.041 s <<< FAILURE! -- in CardTest
+CardTest.checkOutputTxt -- Time elapsed: 0.035 s <<< FAILURE!
 org.junit.ComparisonFailure: expected:<[1 3 3 7]> but was:<[CardDeck@1786dec2]>
 	at org.junit.Assert.assertEquals(Assert.java:117)
 	at org.junit.Assert.assertEquals(Assert.java:146)
@@ -40,11 +36,7 @@ org.junit.ComparisonFailure: expected:<[1 3 3 7]> but was:<[CardDeck@1786dec2]>
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
 
-<<<<<<< HEAD
-CardTest.checkInvalidLines -- Time elapsed: 0.011 s <<< FAILURE!
-=======
-CardTest.checkInvalidLines -- Time elapsed: 0.008 s <<< FAILURE!
->>>>>>> 420deec (run tets)
+CardTest.checkInvalidLines -- Time elapsed: 0.017 s <<< FAILURE!
 java.lang.AssertionError
 	at org.junit.Assert.fail(Assert.java:87)
 	at org.junit.Assert.assertTrue(Assert.java:42)
