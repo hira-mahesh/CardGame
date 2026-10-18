@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="CardTest" time="0.128" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="CardTest" time="0.146" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -11,7 +11,7 @@
     <property name="java.vm.specification.version" value="25"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib"/>
-    <property name="sun.java.command" value="/workspaces/CardGame/target/surefire/surefirebooter-20261018102239707_3.jar /workspaces/CardGame/target/surefire 2026-10-18T10-22-39_524-jvmRun1 surefire-20261018102239707_1tmp surefire_0-20261018102239707_2tmp"/>
+    <property name="sun.java.command" value="/workspaces/CardGame/target/surefire/surefirebooter-20261018103214532_3.jar /workspaces/CardGame/target/surefire 2026-10-18T10-32-14_181-jvmRun1 surefire-20261018103214532_1tmp surefire_0-20261018103214532_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/workspaces/CardGame/target/test-classes:/workspaces/CardGame/target/classes:/home/codespace/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/home/codespace/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -26,7 +26,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/workspaces/CardGame/target/surefire/surefirebooter-20261018102239707_3.jar"/>
+    <property name="surefire.real.class.path" value="/workspaces/CardGame/target/surefire/surefirebooter-20261018103214532_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25.0.4.1+1-LTS"/>
     <property name="user.name" value="codespace"/>
@@ -54,5 +54,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="deckIsFifo" classname="CardTest" time="0.039"/>
+  <testcase name="deckIsFifo" classname="CardTest" time="0.055"/>
 </testsuite>
