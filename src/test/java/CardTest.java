@@ -9,6 +9,7 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -244,6 +245,274 @@ public class CardTest {
         assertEquals(3, CardGame.checkValidPlayerNum(new Scanner("-2\n3")));
         assertEquals(3, CardGame.checkValidPlayerNum(new Scanner("four\n3")));
     }
+
+
+    //assignment tests
+    @Test
+    public void roundRobinTestPlayer() throws IOException {
+        int n = 3;
+        int[] pack = new int[8 * n];
+        for (int i = 0; i < pack.length; i++) {
+            pack[i] = i; // value = position in the pack
+        }
+        Path file = writePack(pack);
+
+        Player[] players = CardGame.makePlayers(n);
+        CardGame.distributeCards(players, file.toString());
+
+        for (int p = 0; p < n; p++) {
+            List<Integer> actual = new ArrayList<>();
+            for (Card c : players[p].getHand()) {
+                actual.add(c.getValue());
+            }
+            List<Integer> expected = Arrays.asList(p, p + n, p + 2 * n, p + 3 * n);
+            assertEquals(expected, actual);
+        }
+    }
+
+    @Test
+    public void roundRobinTestDecks() throws IOException {
+        int n = 3;
+        int[] pack = new int[8 * n];
+        for (int i = 0; i < pack.length; i++) {
+            pack[i] = i;
+        }
+        Path file = writePack(pack);
+
+        CardDeck[] decks = CardGame.createDecks(n);
+        CardGame.distributeDecks(decks, file.toString());
+
+        for (int d = 0; d < n; d++) {
+            List<Integer> drawn = new ArrayList<>();
+            Card c;
+            while ((c = decks[d].drawTop()) != null) {
+                drawn.add(c.getValue());
+            }
+            List<Integer> expected = Arrays.asList(4 * n + d, 5 * n + d, 6 * n + d, 7 * n + d);
+            assertEquals(expected, drawn);
+        }
+    }
+
+
+    //turn tests
     
+    @Test
+    public void keeps4DiscardsNonPreferredCard() {
+        Player p = new Player(1); // player 1 prefers cards of value 1
+        p.addCard(new Card(1));
+        p.addCard(new Card(1));
+        p.addCard(new Card(5));
+        p.addCard(new Card(6));
+
+        CardDeck d1 = new CardDeck(1);
+        CardDeck d2 = new CardDeck(2);
+        d1.addBottom(new Card(1));
+        d1.addBottom(new Card(9));
+        p.setDecks(d1, d2);
+
+        p.turn();
+
+        assertEquals(1, d1.getSize());   // drew the top card
+        assertEquals(1, d2.getSize());   // discarded exactly one card
+        int discarded = d2.drawTop().getValue();
+        assertTrue("discarded a preferred card", discarded == 5 || discarded == 6);
+
+        Card[] hand = p.getHand();
+        assertEquals(4, hand.length);
+        List<Integer> values = new ArrayList<>();
+        for (Card c : hand) {
+            values.add(c.getValue());
+        }
+        Collections.sort(values);
+        if (discarded == 5) {
+            assertEquals(Arrays.asList(1, 1, 1, 6), values);
+        } else {
+            assertEquals(Arrays.asList(1, 1, 1, 5), values);
+        }
+    }
+
+    @Test
+    public void checkRandomNonPreferredDiscards() {
+        Set<Integer> seen = new HashSet<>();
+        for (int round = 0; round < 200; round++) {
+            Player p = new Player(1); // player 1 prefers cards of value 1
+            p.addCard(new Card(1));
+            p.addCard(new Card(1));
+            p.addCard(new Card(5));
+            p.addCard(new Card(6));
+
+            CardDeck d1 = new CardDeck(1);
+            CardDeck d2 = new CardDeck(2);
+            d1.addBottom(new Card(1));
+            p.setDecks(d1, d2);
+
+            Thread.currentThread().interrupt(); // makes the 1 second sleep in turn() end straight away
+            p.turn();
+            Thread.interrupted();               // clear the flag again
+
+            int discarded = d2.drawTop().getValue();
+            assertNotEquals("preferred card was discarded", 1, discarded);
+            seen.add(discarded);
+        }
+        assertEquals("both non-preferred cards should get discarded eventually",
+                new HashSet<>(Arrays.asList(5, 6)), seen);
+    }
+
+    @Test
+    public void skipTurnCheck() {
+        Player p = new Player(1);
+        p.addCard(new Card(1));
+        p.addCard(new Card(1));
+        p.addCard(new Card(5));
+        p.addCard(new Card(6));
+
+        CardDeck d1 = new CardDeck(1);
+        CardDeck d2 = new CardDeck(2);
+        p.setDecks(d1, d2);
+
+        p.turn();
+
+        assertEquals("1 1 5 6", p.getHandString());
+        assertTrue(d1.isEmpty());
+        assertTrue(d2.isEmpty());
+    }
+
+
+    // threading tests
+    @Test
+    public void concurrentTurnsConserveCards() throws Exception {
+        int n = 4;
+        int turnsPerPlayer = 2000;
+
+        int[] pack = new int[8 * n];
+        for (int i = 0; i < pack.length; i++) {
+            pack[i] = i; // every card value is different, so no one can win
+        }
+        Path file = writePack(pack);
+
+        Player[] players = CardGame.makePlayers(n);
+        CardDeck[] decks = CardGame.createDecks(n);
+        CardGame.distributeCards(players, file.toString());
+        CardGame.distributeDecks(decks, file.toString());
+        CardGame.assignDecks(players, decks);
+
+        Thread[] workers = new Thread[n];
+        for (int i = 0; i < n; i++) {
+            final Player p = players[i];
+            workers[i] = new Thread(() -> {
+                for (int t = 0; t < turnsPerPlayer; t++) {
+                    Thread.currentThread().interrupt(); // makes the 1 second sleep in turn() end straight away
+                    p.turn();
+                }
+            });
+            workers[i].start();
+        }
+        for (Thread w : workers) {
+            w.join(30000);
+            assertFalse("worker stuck (deadlock?)", w.isAlive());
+        }
+
+        List<Integer> all = new ArrayList<>();
+        for (Player p : players) {
+            Card[] hand = p.getHand();
+            assertEquals(4, hand.length);
+            for (Card c : hand) {
+                all.add(c.getValue());
+            }
+        }
+        for (CardDeck d : decks) {
+            Card c;
+            while ((c = d.drawTop()) != null) {
+                all.add(c.getValue());
+            }
+        }
+
+        Collections.sort(all);
+        List<Integer> expected = new ArrayList<>();
+        for (int v : pack) {
+            expected.add(v);
+        }
+        assertEquals("cards were lost or duplicated", expected, all);
+    }
+
+
+    @Test
+    public void immediateWin() throws Exception {
+        int n = 2;
+        int[] pack = new int[8 * n];
+        for (int i = 0; i < pack.length; i++) {
+            pack[i] = i + 10; // distinct values that can't be a winning hand for anyone
+        }
+        pack[0] = pack[2] = pack[4] = pack[6] = 1; // player 1 hand: 1 1 1 1
+        Path file = writePack(pack);
+
+        Player[] players = CardGame.makePlayers(n);
+        CardDeck[] decks = CardGame.createDecks(n);
+        CardGame.distributeCards(players, file.toString());
+        CardGame.distributeDecks(decks, file.toString());
+        CardGame.assignDecks(players, decks);
+        players[0].writeInitialHand();
+
+        Player.resetGame();
+        PrintStream old = System.out;
+        ByteArrayOutputStream buf = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(buf, true));
+        try {
+            players[0].run(); // called directly, so no new thread is needed
+        } finally {
+            System.setOut(old);
+        }
+        String out = buf.toString();
+
+        assertTrue(out.contains("Player 1 wins"));
+        assertEquals(out.indexOf("Player 1 wins"), out.lastIndexOf("Player 1 wins")); // printed only once
+        assertEquals(4, decks[0].getSize()); // no draw happened
+        assertEquals(4, decks[1].getSize());
+        assertEquals("1 1 1 1", players[0].getHandString());
+
+        List<String> lines = Files.readAllLines(Paths.get("player1_output.txt"));
+        assertEquals(Arrays.asList("player 1 initial hand 1 1 1 1"), lines);
+    }
+
+    @Test
+    public void formatWinningTurn() throws Exception {
+        int n = 2;
+        int[] pack = new int[8 * n];
+        for (int i = 0; i < pack.length; i++) {
+            pack[i] = i + 10; // distinct values that can't be a winning hand for anyone
+        }
+        pack[0] = pack[2] = pack[4] = 1;
+        pack[6] = 5;  // player 1 hand: 1 1 1 5
+        pack[8] = 1;  // top of deck 1: a 1
+        Path file = writePack(pack);
+
+        Player[] players = CardGame.makePlayers(n);
+        CardDeck[] decks = CardGame.createDecks(n);
+        CardGame.distributeCards(players, file.toString());
+        CardGame.distributeDecks(decks, file.toString());
+        CardGame.assignDecks(players, decks);
+        players[0].writeInitialHand();
+
+        Player.resetGame();
+        players[0].run(); // called directly: the winning turn returns before the sleep
+
+        List<String> expectedLines = Arrays.asList(
+                "player 1 initial hand 1 1 1 5",
+                "player 1 draws a 1 from deck 1",
+                "player 1 discards a 5 to deck 2",
+                "player 1 current hand is 1 1 1 1");
+        assertEquals(expectedLines, Files.readAllLines(Paths.get("player1_output.txt")));
+
+        assertEquals("1 1 1 1", players[0].getHandString());
+        assertEquals(3, decks[0].getSize());
+
+        List<Integer> deck2 = new ArrayList<>();
+        Card c;
+        while ((c = decks[1].drawTop()) != null) {
+            deck2.add(c.getValue());
+        }
+        assertEquals(5, deck2.size());
+        assertEquals(5, deck2.get(deck2.size() - 1).intValue()); // discarded to the BOTTOM of deck 2
+    }
 
 }
