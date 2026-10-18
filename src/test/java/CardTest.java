@@ -184,6 +184,30 @@ public class CardTest {
         for (int i = 0; i < 4; i++) p.addCard(new Card(i));
         assertThrows(IllegalStateException.class, () -> p.addCard(new Card(9)));
     }
+    @Test
+    public void getHandReturnsACopy() {
+        Player p = new Player(1);
+        for (int i = 0; i < 4; i++) p.addCard(new Card(i));
+        p.getHand()[0] = null;                         // tamper with the copy
+        assertEquals("0 1 2 3", p.getHandString());    // original untouched
+    }
+    @Test
+    public void checkWinningHand() {
+        for (int value : new int[]{1, 7}) {            // 1 is player 1's preferred value, 7 is not
+            Player p = new Player(1);
+            for (int i = 0; i < 4; i++) p.addCard(new Card(value));
+            assertEquals(value + " " + value + " " + value + " " + value, p.getHandString());
+        }
+    }
+    @Test
+    public void testBadHands() {
+        Player p = new Player(1);
+        for (int v : new int[]{1, 1, 1}) p.addCard(new Card(v));
+        assertEquals("1 1 1", p.getHandString());
+        p.addCard(new Card(2));
+        assertEquals("1 1 1 2", p.getHandString());
+    }
+
 
 
 }
