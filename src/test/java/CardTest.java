@@ -108,4 +108,42 @@ public class CardTest {
         assertEquals(Arrays.asList(1,2,3), drain(deck)); //checks if the array is in right order
      }
 
+     @Test 
+     public void drawEmptyReturnsNull(){
+        CardDeck deck = new CardDeck(1);
+        assertNull(deck.drawTop());
+        assertTrue(deck.isEmpty());
+        assertEquals(0, deck.getSize());
+     }
+
+     @Test
+    public void checkOutputTxt() {
+        CardDeck d = new CardDeck(2);
+        for (int v : new int[]{1, 3, 3, 7}) d.addBottom(new Card(v));
+        assertEquals("1 3 3 7", d.toString());
+        assertEquals(4, d.getSize());
+        assertEquals("", new CardDeck(3).toString());
+    }
+
+    @Test
+    public void concurrentAddsAreNotLost() throws Exception {
+        final CardDeck deck = new CardDeck(1);
+        int threads = 8;
+        int perThread = 1000;
+        Thread[] ts = new Thread[threads];
+        for (int t = 0; t < threads; t++) {
+            ts[t] = new Thread(() -> {
+                for (int i = 0; i < perThread; i++) {
+                    deck.addBottom(new Card(i));
+                }
+            });
+            ts[t].start();
+        }
+        for (Thread t : ts) {
+            t.join();
+        }
+        assertEquals(threads * perThread, deck.getSize());
+    }
+
+
 }
