@@ -180,7 +180,7 @@ public class CardTest {
     //player tests
     @Test
     public void handRejectsAFifthCard() {
-        final Player p = new Player(1, directory());
+        final Player p = new Player(1);
         for (int i = 0; i < 4; i++) p.addCard(new Card(i));
         assertThrows(IllegalStateException.class, () -> p.addCard(new Card(9)));
     }
