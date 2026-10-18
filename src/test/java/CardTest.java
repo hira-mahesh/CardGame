@@ -105,7 +105,7 @@ public class CardTest {
         deck.addBottom(new Card(1));
         deck.addBottom(new Card(2));
         deck.addBottom(new Card(3)); 
-        assertEquals(Arrays.asList(1,2,3), drain(deck));
+        assertEquals(Arrays.asList(1,2,3), drain(deck)); //checks if the array is in right order
      }
 
 }
