@@ -128,7 +128,7 @@ public class CardTest {
     }
 
     @Test
-    public void concurrentAddsAreNotLost() throws Exception {
+    public void addBottomWorks() throws Exception {
         final CardDeck deck = new CardDeck(1);
         int threads = 8;
         int perThread = 1000;
@@ -145,6 +145,36 @@ public class CardTest {
             t.join();
         }
         assertEquals(threads * perThread, deck.getSize());
+    }
+    @Test
+    public void cardsDrawnCorrectly() throws Exception {
+        final CardDeck deck = new CardDeck(1);
+        int total = 4000;
+        for (int i = 0; i < total; i++) {
+            deck.addBottom(new Card(i));
+        }
+
+        final int[] counts = new int[total];
+        Thread[] ts = new Thread[8];
+        for (int t = 0; t < ts.length; t++) {
+            ts[t] = new Thread(() -> {
+                Card c;
+                while ((c = deck.drawTop()) != null) {
+                    synchronized (counts) {
+                        counts[c.getValue()]++;
+                    }
+                }
+            });
+            ts[t].start();
+        }
+        for (Thread t : ts) {
+            t.join();
+        }
+
+        for (int i = 0; i < total; i++) {
+            assertEquals("card " + i + " was lost or drawn twice", 1, counts[i]);
+        }
+        assertTrue(deck.isEmpty());
     }
 
 
