@@ -208,6 +208,42 @@ public class CardTest {
         assertEquals("1 1 1 2", p.getHandString());
     }
 
-
+    // input validation tests
+    @Test
+    public void acceptsAValidPack() throws IOException {
+        assertTrue(CardGame.checkValidFile(writePack(distinctPack(2)).toString(), 2));
+    }
+    @Test
+    public void rejectsNot8n() throws IOException {
+        assertFalse(CardGame.checkValidFile(writePack(distinctPack(2)).toString(), 3));
+        assertFalse(CardGame.checkValidFile(writePack(distinctPack(3)).toString(), 2));
+    }
+    @Test
+    public void checkInvalidLines() throws IOException {
+        String line = "1\n";
+        StringBuilder base = new StringBuilder();
+        for (int i = 0; i < 15; i++) base.append(line);
+        assertFalse(CardGame.checkValidFile(writeRaw(base + "abc\n").toString(), 2));
+        assertFalse(CardGame.checkValidFile(writeRaw(base + "-3\n").toString(), 2));
+        assertFalse(CardGame.checkValidFile(writeRaw(base + "\n").toString(), 2));
+        assertFalse(CardGame.checkValidFile(writeRaw(base + "1.5\n").toString(), 2));
+        assertFalse(CardGame.checkValidFile(writeRaw(base + "99999999999\n").toString(), 2));
+    }
+    @Test
+    public void checksFileAndPlayerCount() throws IOException {
+        assertFalse(CardGame.checkValidFile(directory().resolve("impossible.txt").toString(), 2));
+        Path ok = writePack(distinctPack(1));
+        assertFalse(CardGame.checkValidFile(ok.toString(), 0));
+        assertFalse(CardGame.checkValidFile(ok.toString(), -1));
+    }
+    @Test
+    public void playerCountValidation() {
+        assertEquals(4, CardGame.checkValidPlayerNum(new Scanner("4")));
+        assertEquals(4, CardGame.checkValidPlayerNum(new Scanner(" 4 ")));
+        assertEquals(3, CardGame.checkValidPlayerNum(new Scanner("0\n3")));
+        assertEquals(3, CardGame.checkValidPlayerNum(new Scanner("-2\n3")));
+        assertEquals(3, CardGame.checkValidPlayerNum(new Scanner("four\n3")));
+    }
+    
 
 }
