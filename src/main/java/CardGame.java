@@ -75,7 +75,7 @@ public class CardGame {
             if (scanner.hasNextInt()) {
                 int numberOfPlayers = scanner.nextInt();
 
-                if (numberOfPlayers > 0) {
+                if (numberOfPlayers > 0 && numberOfPlayers <= 15) {
                     return numberOfPlayers;
                 }
             } else {
@@ -85,9 +85,8 @@ public class CardGame {
             System.out.println("Invalid number of players. Please try again.");
         }
     }
-    public static boolean checkValidFile(
-            String packLocation, int numberOfPlayers) {
-        if (numberOfPlayers <= 0) {
+    public static boolean checkValidFile( String packLocation, int numberOfPlayers) {
+        if (numberOfPlayers <= 0 || numberOfPlayers > 15) {
             return false;
         }
         File pack = new File(packLocation);
