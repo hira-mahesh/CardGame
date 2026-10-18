@@ -38,6 +38,12 @@ public class CardTest {
     return p;
 }
 
+    private Path writeRaw(String content) throws IOException {
+        Path p = Files.createTempFile(directory(), "raw", ".txt");
+        Files.writeString(p, content);
+        return p;
+    }
+
     private static  List<Integer> drain(CardDeck d)
     {
         List<Integer> out = new ArrayList<>();
@@ -48,11 +54,7 @@ public class CardTest {
         return out;
     }
 
-    private Path writeRaw(String content) throws IOException {
-        Path p = Files.createTempFile(directory(), "raw", ".txt");
-        Files.writeString(p, content);
-        return p;
-    }
+   
     private int[] distinctPack(int n) {
         int[] pack = new int[8 * n];
         for (int i = 0; i < pack.length; i++) pack[i] = 100 + i;
