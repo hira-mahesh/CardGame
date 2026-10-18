@@ -100,7 +100,15 @@ public class CardGame {
                 if (!data.matches("\\d+")) {
                     return false;
                 }
+                // Reject numbers that are too large to fit in an int.
+                try {
+                    Integer.parseInt(data);
+                } catch (NumberFormatException e) {
+                    return false;
+                }
                 lineCount++;
+
+                
             }
             // Exactly eight cards per player
             return lineCount == 8 * numberOfPlayers;
