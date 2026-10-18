@@ -18,17 +18,17 @@ import static org.junit.Assert.*;
 
 public class CardTest {
     @Rule
-    public TemporaryFolder folder = new TemporaryFolder();   // fresh directory for every test
+    public TemporaryFolder folder = new TemporaryFolder();   // creates a temp  directory for every test
 
-    @Before
+    @Before //execute the method before each test method
     public void resetSharedState() {
         Player.resetGame();   // gameOver and winnerNum are static, so every test must start clean
     }
-    private Path directory() { 
+    private Path directory() { //returns  path of the temp directory
         return folder.getRoot().toPath(); 
     }
 
- private Path writePack(int... values) throws IOException {
+ private Path writePack(int... values) throws IOException { //creates a temp pack file with one integer on each line
     StringBuilder sb = new StringBuilder();
     for (int v : values){
          sb.append(v).append('\n');
@@ -38,13 +38,13 @@ public class CardTest {
     return p;
 }
 
-    private Path writeRaw(String content) throws IOException {
+    private Path writeRaw(String content) throws IOException { //takes string instead
         Path p = Files.createTempFile(directory(), "raw", ".txt");
         Files.writeString(p, content);
         return p;
     }
 
-    private static  List<Integer> drain(CardDeck d)
+    private static  List<Integer> drain(CardDeck d) //gets every card from  deck and adds values in list
     {
         List<Integer> out = new ArrayList<>();
         Card c;
@@ -55,18 +55,18 @@ public class CardTest {
     }
 
    
-    private int[] distinctPack(int n) {
+    private int[] distinctPack(int n) { //makes  array which represnts a pack where every card has a different value
         int[] pack = new int[8 * n];
         for (int i = 0; i < pack.length; i++) pack[i] = 100 + i;
         return pack;
     }
-    private int[] winnablePack(int n) {
+    private int[] winnablePack(int n) { //create a pack containing four cards with the same value ;helps test if a player can win
         int[] pack = distinctPack(n);
         pack[0] = 1; pack[n] = 1; pack[2 * n] = 1;
         pack[4 * n] = 1;
         return pack;
     }
-    private void runAll(Player[] players, long timeoutMs) throws InterruptedException {
+    private void runAll(Player[] players, long timeoutMs) throws InterruptedException { //starts all the players at the same time and waits for them to finish, then checks that no threads still awake after waiting period
         Player.resetGame();
         Thread[] threads = new Thread[players.length];
         for (int i = 0; i < players.length; i++) {
@@ -79,21 +79,21 @@ public class CardTest {
         }
     }
 
-    private static List<Integer> handValues(Player p) {
+    private static List<Integer> handValues(Player p) { //takes players hand and returns list of values of the cards in hand.
         List<Integer> v = new ArrayList<>();
         for (Card c : p.getHand()) v.add(c.getValue());
         return v;
     }
-    private List<String> readLines(String fileName) throws IOException {
+    private List<String> readLines(String fileName) throws IOException { //reads every line from a file in the temp directory and returns as strings
         return Files.readAllLines(directory().resolve(fileName));
     }
-    private static int countMatches(String text, String regex) {
+    private static int countMatches(String text, String regex) { //counts how many times  regex matches  string
         Matcher m = Pattern.compile(regex, Pattern.CASE_INSENSITIVE).matcher(text);
         int c = 0;
         while (m.find()) c++;
         return c;
     }
-    private static int totalInDecks(CardDeck[] ds, int i) {
+    private static int totalInDecks(CardDeck[] ds, int i) { //the total number of cards across all the decks in CardDeck array.
         if (i == ds.length) return 0;
         synchronized (ds[i]) { return ds[i].getSize() + totalInDecks(ds, i + 1); }
     }
@@ -101,7 +101,7 @@ public class CardTest {
 
     //tests for CardDeck class
     @Test 
-    public void deckIsFifo(){
+    public void deckIsFifo(){ //checks if deck follows First In, First Out order
         //adds cards of value 1,2,3 to the bottom
         CardDeck deck = new CardDeck(1);
         deck.addBottom(new Card(1));
@@ -111,7 +111,7 @@ public class CardTest {
      }
 
      @Test 
-     public void drawEmptyReturnsNull(){
+     public void drawEmptyReturnsNull(){ //checks what happens when you try drawing from empty deck
         CardDeck deck = new CardDeck(1);
         assertNull(deck.drawTop());
         assertTrue(deck.isEmpty());
@@ -119,7 +119,7 @@ public class CardTest {
      }
 
      @Test
-    public void checkOutputTxt() {
+    public void checkOutputTxt() { //checks the text representation of a deck and the size
         CardDeck d = new CardDeck(2);
         for (int v : new int[]{1, 3, 3, 7}) d.addBottom(new Card(v));
         assertEquals("1 3 3 7", d.toString());
@@ -128,7 +128,7 @@ public class CardTest {
     }
 
     @Test
-    public void addBottomWorks() throws Exception {
+    public void addBottomWorks() throws Exception { //checks if multiple threads can add cards to the same deck without losing added dards
         final CardDeck deck = new CardDeck(1);
         int threads = 8;
         int perThread = 1000;
@@ -147,7 +147,7 @@ public class CardTest {
         assertEquals(threads * perThread, deck.getSize());
     }
     @Test
-    public void cardsDrawnCorrectly() throws Exception {
+    public void cardsDrawnCorrectly() throws Exception { //check if CardDeck works if multiple threads draw deck at the same time
         final CardDeck deck = new CardDeck(1);
         int total = 4000;
         for (int i = 0; i < total; i++) {
