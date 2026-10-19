@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="CardTest" time="1.477" tests="23" errors="1" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="CardTest" time="1.58" tests="23" errors="0" skipped="0" failures="1">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -11,7 +11,7 @@
     <property name="java.vm.specification.version" value="25"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib"/>
-    <property name="sun.java.command" value="/workspaces/CardGame/target/surefire/surefirebooter-20261019184454679_3.jar /workspaces/CardGame/target/surefire 2026-10-19T18-44-54_412-jvmRun1 surefire-20261019184454679_1tmp surefire_0-20261019184454679_2tmp"/>
+    <property name="sun.java.command" value="/workspaces/CardGame/target/surefire/surefirebooter-20261019184634647_3.jar /workspaces/CardGame/target/surefire 2026-10-19T18-46-34_490-jvmRun1 surefire-20261019184634647_1tmp surefire_0-20261019184634647_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/workspaces/CardGame/target/test-classes:/workspaces/CardGame/target/classes:/home/codespace/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/home/codespace/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -26,7 +26,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/workspaces/CardGame/target/surefire/surefirebooter-20261019184454679_3.jar"/>
+    <property name="surefire.real.class.path" value="/workspaces/CardGame/target/surefire/surefirebooter-20261019184634647_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25.0.4.1+1-LTS"/>
     <property name="user.name" value="codespace"/>
@@ -54,164 +54,364 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="checksFileAndPlayerCount" classname="CardTest" time="0.041"/>
-  <testcase name="formatWinningTurn" classname="CardTest" time="0.016">
+  <testcase name="checksFileAndPlayerCount" classname="CardTest" time="0.047"/>
+  <testcase name="formatWinningTurn" classname="CardTest" time="0.045">
     <system-out><![CDATA[player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 1
 Player 1 wins
 ]]></system-out>
   </testcase>
-  <testcase name="acceptsAValidPack" classname="CardTest" time="0.001"/>
-  <testcase name="roundRobinTestDecks" classname="CardTest" time="0.005"/>
-  <testcase name="testBadHands" classname="CardTest" time="0.002"/>
-  <testcase name="drawEmptyReturnsNull" classname="CardTest" time="0.004"/>
+  <testcase name="acceptsAValidPack" classname="CardTest" time="0.0"/>
+  <testcase name="roundRobinTestDecks" classname="CardTest" time="0.0"/>
+  <testcase name="testBadHands" classname="CardTest" time="0.0"/>
+  <testcase name="drawEmptyReturnsNull" classname="CardTest" time="0.0"/>
   <testcase name="deckIsFifo" classname="CardTest" time="0.0"/>
   <testcase name="skipTurnCheck" classname="CardTest" time="0.0"/>
-  <testcase name="rejectsNot8n" classname="CardTest" time="0.007"/>
+  <testcase name="rejectsNot8n" classname="CardTest" time="0.0"/>
   <testcase name="handRejectsAFifthCard" classname="CardTest" time="0.0"/>
-  <testcase name="checkWinningHand" classname="CardTest" time="0.006"/>
-  <testcase name="concurrentTurnsConserveCards" classname="CardTest" time="0.059">
-    <system-out><![CDATA[player 2 draws a 17 from deck 2 and discards a 9 to deck 3
-player 2 current hand is 1 5 17 13
-player 1 draws a 16 from deck 1 and discards a 0 to deck 2
+  <testcase name="checkWinningHand" classname="CardTest" time="0.0"/>
+  <testcase name="concurrentTurnsConserveCards" classname="CardTest" time="0.133">
+    <system-out><![CDATA[player 1 draws a 16 from deck 1 and discards a 0 to deck 2
 player 1 current hand is 16 4 8 12
-player 3 draws a 18 from deck 3 and discards a 2 to deck 4
+player 1 draws a 20 from deck 1 and discards a 4 to deck 2
+player 1 current hand is 16 20 8 12
+player 2 draws a 17 from deck 2 and discards a 13 to deck 3
+player 2 current hand is 1 5 9 17
+player 2 draws a 21 from deck 2 and discards a 9 to deck 3
+player 2 current hand is 1 5 21 17
+player 1 draws a 24 from deck 1 and discards a 8 to deck 2
+player 1 current hand is 16 20 24 12
+player 1 draws a 28 from deck 1 and discards a 20 to deck 2
+player 1 current hand is 16 28 24 12
+player 3 draws a 18 from deck 3 and discards a 10 to deck 4
+player 3 current hand is 2 6 18 14
+player 3 draws a 22 from deck 3 and discards a 6 to deck 4
+player 2 draws a 25 from deck 2 and discards a 5 to deck 3
+player 3 current hand is 2 22 18 14
 player 4 draws a 19 from deck 4 and discards a 7 to deck 1
 player 4 current hand is 3 19 11 15
-player 3 current hand is 18 6 10 14
-player 3 draws a 22 from deck 3 and discards a 6 to deck 4
-player 3 current hand is 18 22 10 14
-player 3 draws a 26 from deck 3 and discards a 18 to deck 4
-player 3 current hand is 26 22 10 14
-player 4 draws a 23 from deck 4 and discards a 11 to deck 1
-player 3 draws a 30 from deck 3 and discards a 14 to deck 4
-player 3 current hand is 26 22 10 30
-player 4 current hand is 3 19 23 15
-player 3 draws a 9 from deck 3 and discards a 26 to deck 4
-player 3 current hand is 9 22 10 30
-player 2 draws a 21 from deck 2 and discards a 13 to deck 3
-player 2 current hand is 1 5 17 21
-player 4 draws a 27 from deck 4 and discards a 19 to deck 1
-player 4 current hand is 3 27 23 15
-player 2 draws a 25 from deck 2 and discards a 17 to deck 3
-player 2 current hand is 1 5 25 21
-player 4 draws a 31 from deck 4 and discards a 15 to deck 1
-player 4 current hand is 3 27 23 31
-player 1 draws a 20 from deck 1 and discards a 16 to deck 2
-player 1 current hand is 20 4 8 12
-player 4 draws a 2 from deck 4 and discards a 27 to deck 1
-player 4 current hand is 3 2 23 31
-player 1 draws a 24 from deck 1 and discards a 20 to deck 2
-player 1 current hand is 24 4 8 12
-player 4 draws a 6 from deck 4 and discards a 23 to deck 1
-player 4 current hand is 3 2 6 31
-player 4 draws a 18 from deck 4 and discards a 3 to deck 1
-player 4 current hand is 18 2 6 31
-player 1 draws a 28 from deck 1 and discards a 4 to deck 2
-player 1 current hand is 24 28 8 12
-player 4 draws a 14 from deck 4 and discards a 31 to deck 1
-player 4 current hand is 18 2 6 14
-player 4 draws a 26 from deck 4 and discards a 18 to deck 1
-player 4 current hand is 26 2 6 14
-player 2 draws a 29 from deck 2 and discards a 1 to deck 3
-player 2 current hand is 29 5 25 21
-player 2 draws a 0 from deck 2 and discards a 25 to deck 3
-player 2 current hand is 29 5 0 21
-player 2 draws a 16 from deck 2 and discards a 5 to deck 3
-player 1 draws a 7 from deck 1 and discards a 12 to deck 2
-player 1 current hand is 24 28 8 7
-player 2 current hand is 29 16 0 21
-player 2 draws a 20 from deck 2 and discards a 0 to deck 3
-player 2 current hand is 29 16 20 21
-player 2 draws a 4 from deck 2 and discards a 29 to deck 3
-player 2 current hand is 4 16 20 21
-player 1 draws a 11 from deck 1 and discards a 8 to deck 2
-player 1 current hand is 24 28 11 7
-player 2 draws a 12 from deck 2 and discards a 21 to deck 3
-player 2 current hand is 4 16 20 12
-player 2 draws a 8 from deck 2 and discards a 12 to deck 3
-player 2 current hand is 4 16 20 8
-player 2 draws a 28 from deck 2 and discards a 20 to deck 3
-player 1 draws a 19 from deck 1 and discards a 28 to deck 2
-player 2 current hand is 4 16 28 8
-player 1 current hand is 24 19 11 7
+player 4 draws a 23 from deck 4 and discards a 15 to deck 1
+player 4 current hand is 3 19 11 23
+player 4 draws a 27 from deck 4 and discards a 23 to deck 1
+player 4 current hand is 3 19 11 27
+player 4 draws a 31 from deck 4 and discards a 3 to deck 1
+player 4 current hand is 31 19 11 27
+player 4 draws a 10 from deck 4 and discards a 31 to deck 1
+player 4 current hand is 10 19 11 27
+player 3 draws a 26 from deck 3 and discards a 2 to deck 4
+player 3 current hand is 26 22 18 14
+player 2 current hand is 1 25 21 17
+player 4 draws a 6 from deck 4 and discards a 27 to deck 1
+player 4 current hand is 10 19 11 6
+player 2 draws a 29 from deck 2 and discards a 17 to deck 3
+player 2 current hand is 1 25 21 29
+player 2 draws a 0 from deck 2 and discards a 29 to deck 3
+player 2 current hand is 1 25 21 0
+player 2 draws a 4 from deck 2 and discards a 21 to deck 3
+player 2 current hand is 1 25 4 0
+player 4 draws a 2 from deck 4 and discards a 11 to deck 1
+player 4 current hand is 10 19 2 6
+player 3 draws a 30 from deck 3 and discards a 26 to deck 4
+player 3 current hand is 30 22 18 14
+player 1 draws a 7 from deck 1 and discards a 24 to deck 2
+player 1 current hand is 16 28 7 12
+player 1 draws a 15 from deck 1 and discards a 12 to deck 2
+player 1 current hand is 16 28 7 15
+player 1 draws a 23 from deck 1 and discards a 28 to deck 2
+player 1 current hand is 16 23 7 15
+player 1 draws a 3 from deck 1 and discards a 15 to deck 2
+player 1 current hand is 16 23 7 3
 player 3 draws a 13 from deck 3 and discards a 22 to deck 4
-player 2 draws a 19 from deck 2 and discards a 8 to deck 3
-player 3 current hand is 9 13 10 30
-player 2 current hand is 4 16 28 19
-player 3 draws a 17 from deck 3 and discards a 13 to deck 4
-player 3 current hand is 9 17 10 30
-player 1 draws a 15 from deck 1 and discards a 19 to deck 2
-player 1 current hand is 24 15 11 7
-player 3 draws a 1 from deck 3 and discards a 9 to deck 4
-player 3 current hand is 1 17 10 30
-player 1 draws a 27 from deck 1 and discards a 7 to deck 2
-player 1 current hand is 24 15 11 27
-player 3 draws a 25 from deck 3 and discards a 17 to deck 4
-player 1 draws a 23 from deck 1 and discards a 27 to deck 2
-player 3 current hand is 1 25 10 30
-player 1 current hand is 24 15 11 23
-player 1 draws a 3 from deck 1 and discards a 23 to deck 2
-player 1 current hand is 24 15 11 3
-player 1 draws a 31 from deck 1 and discards a 24 to deck 2
-player 1 current hand is 31 15 11 3
-player 3 draws a 5 from deck 3 and discards a 30 to deck 4
-player 3 current hand is 1 25 10 5
-player 1 draws a 18 from deck 1 and discards a 31 to deck 2
-player 1 current hand is 18 15 11 3
-player 3 draws a 0 from deck 3 and discards a 10 to deck 4
-player 3 current hand is 1 25 0 5
-player 3 draws a 29 from deck 3 and discards a 0 to deck 4
-player 3 current hand is 1 25 29 5
-player 3 draws a 21 from deck 3 and discards a 25 to deck 4
-player 3 current hand is 1 21 29 5
-player 3 draws a 12 from deck 3 and discards a 21 to deck 4
-player 3 current hand is 1 12 29 5
-player 3 draws a 20 from deck 3 and discards a 1 to deck 4
-player 3 current hand is 20 12 29 5
-player 3 draws a 8 from deck 3 and discards a 5 to deck 4
-player 3 current hand is 20 12 29 8
+player 3 current hand is 30 13 18 14
+player 3 draws a 9 from deck 3 and discards a 30 to deck 4
+player 3 current hand is 9 13 18 14
+player 4 draws a 26 from deck 4 and discards a 6 to deck 1
+player 4 current hand is 10 19 2 26
+player 1 draws a 31 from deck 1 and discards a 3 to deck 2
+player 1 current hand is 16 23 7 31
+player 2 draws a 8 from deck 2 and discards a 4 to deck 3
+player 2 current hand is 1 25 8 0
+player 3 draws a 5 from deck 3 and discards a 13 to deck 4
+player 3 current hand is 9 5 18 14
+player 4 draws a 22 from deck 4 and discards a 26 to deck 1
+player 4 current hand is 10 19 2 22
+player 1 draws a 27 from deck 1 and discards a 31 to deck 2
+player 1 current hand is 16 23 7 27
+player 2 draws a 20 from deck 2 and discards a 0 to deck 3
+player 2 current hand is 1 25 8 20
+player 3 draws a 17 from deck 3 and discards a 5 to deck 4
+player 3 current hand is 9 17 18 14
+player 4 draws a 30 from deck 4 and discards a 19 to deck 1
+player 4 current hand is 10 30 2 22
+player 2 draws a 24 from deck 2 and discards a 8 to deck 3
+player 2 current hand is 1 25 24 20
+player 3 draws a 29 from deck 3 and discards a 17 to deck 4
+player 3 current hand is 9 29 18 14
+player 4 draws a 13 from deck 4 and discards a 30 to deck 1
+player 4 current hand is 10 13 2 22
+player 3 draws a 21 from deck 3 and discards a 9 to deck 4
+player 3 current hand is 21 29 18 14
+player 2 draws a 12 from deck 2 and discards a 20 to deck 3
+player 2 current hand is 1 25 24 12
+player 4 draws a 5 from deck 4 and discards a 13 to deck 1
+player 4 current hand is 10 5 2 22
+player 4 draws a 17 from deck 4 and discards a 22 to deck 1
+player 4 current hand is 10 5 2 17
+player 1 draws a 11 from deck 1 and discards a 27 to deck 2
+player 1 current hand is 16 23 7 11
+player 1 draws a 6 from deck 1 and discards a 11 to deck 2
+player 1 current hand is 16 23 7 6
+player 1 draws a 26 from deck 1 and discards a 16 to deck 2
+player 1 current hand is 26 23 7 6
+player 2 draws a 28 from deck 2 and discards a 25 to deck 3
+player 2 current hand is 1 28 24 12
+player 3 draws a 4 from deck 3 and discards a 21 to deck 4
+player 3 current hand is 4 29 18 14
+player 4 draws a 9 from deck 4 and discards a 17 to deck 1
+player 4 current hand is 10 5 2 9
+player 1 draws a 19 from deck 1 and discards a 23 to deck 2
+player 1 current hand is 26 19 7 6
+player 1 draws a 30 from deck 1 and discards a 26 to deck 2
+player 1 current hand is 30 19 7 6
+player 1 draws a 13 from deck 1 and discards a 7 to deck 2
+player 1 current hand is 30 19 13 6
+player 2 draws a 15 from deck 2 and discards a 28 to deck 3
+player 2 current hand is 1 15 24 12
+player 2 draws a 3 from deck 2 and discards a 12 to deck 3
+player 2 current hand is 1 15 24 3
+player 1 draws a 22 from deck 1 and discards a 13 to deck 2
+player 2 draws a 31 from deck 2 and discards a 3 to deck 3
+player 2 current hand is 1 15 24 31
+player 1 current hand is 30 19 22 6
+player 4 draws a 21 from deck 4 and discards a 5 to deck 1
+player 4 current hand is 10 21 2 9
+player 4 draws a 14 from deck 4 and discards a 10 to deck 1
+player 4 current hand is 14 21 2 9
+player 1 draws a 17 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 30 19 22 17
+player 2 draws a 27 from deck 2 and discards a 31 to deck 3
+player 2 current hand is 1 15 24 27
+player 3 draws a 0 from deck 3 and discards a 14 to deck 4
+player 3 current hand is 4 29 18 0
+player 3 draws a 8 from deck 3 and discards a 0 to deck 4
+player 3 current hand is 4 29 18 8
+player 3 draws a 20 from deck 3 and discards a 18 to deck 4
+player 3 current hand is 4 29 20 8
+player 2 draws a 11 from deck 2 and discards a 15 to deck 3
+player 2 current hand is 1 11 24 27
+player 3 draws a 25 from deck 3 and discards a 29 to deck 4
+player 3 current hand is 4 25 20 8
+player 2 draws a 16 from deck 2 and discards a 11 to deck 3
+player 2 current hand is 1 16 24 27
+player 3 draws a 28 from deck 3 and discards a 8 to deck 4
+player 3 current hand is 4 25 20 28
+player 3 draws a 12 from deck 3 and discards a 4 to deck 4
+player 3 current hand is 12 25 20 28
+player 1 draws a 5 from deck 1 and discards a 30 to deck 2
+player 1 current hand is 5 19 22 17
+player 2 draws a 23 from deck 2 and discards a 24 to deck 3
+player 2 current hand is 1 16 23 27
+player 1 draws a 10 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 10 19 22 17
+player 2 draws a 26 from deck 2 and discards a 1 to deck 3
+player 2 current hand is 26 16 23 27
+player 3 draws a 3 from deck 3 and discards a 28 to deck 4
+player 3 current hand is 12 25 20 3
+player 3 draws a 31 from deck 3 and discards a 20 to deck 4
+player 3 current hand is 12 25 31 3
+player 4 draws a 0 from deck 4 and discards a 21 to deck 1
+player 4 current hand is 14 0 2 9
+player 1 draws a 21 from deck 1 and discards a 10 to deck 2
+player 1 current hand is 21 19 22 17
+player 2 draws a 7 from deck 2 and discards a 26 to deck 3
+player 4 draws a 18 from deck 4 and discards a 2 to deck 1
+player 2 current hand is 7 16 23 27
+player 4 current hand is 14 0 18 9
+player 1 draws a 2 from deck 1 and discards a 19 to deck 2
+player 3 draws a 15 from deck 3 and discards a 12 to deck 4
+player 3 current hand is 15 25 31 3
+player 1 current hand is 21 2 22 17
+player 2 draws a 13 from deck 2 and discards a 27 to deck 3
+player 2 current hand is 7 16 23 13
+player 4 draws a 29 from deck 4 and discards a 14 to deck 1
+player 4 current hand is 29 0 18 9
+player 1 draws a 14 from deck 1 and discards a 22 to deck 2
+player 2 draws a 6 from deck 2 and discards a 23 to deck 3
+player 2 current hand is 7 16 6 13
+player 3 draws a 11 from deck 3 and discards a 31 to deck 4
+player 3 current hand is 15 25 11 3
+player 4 draws a 8 from deck 4 and discards a 9 to deck 1
+player 4 current hand is 29 0 18 8
+player 4 draws a 4 from deck 4 and discards a 18 to deck 1
+player 4 current hand is 29 0 4 8
+player 1 current hand is 21 2 14 17
+player 4 draws a 28 from deck 4 and discards a 8 to deck 1
+player 4 current hand is 29 0 4 28
+player 4 draws a 20 from deck 4 and discards a 28 to deck 1
+player 4 current hand is 29 0 4 20
+player 1 draws a 9 from deck 1 and discards a 17 to deck 2
+player 1 current hand is 21 2 14 9
+player 1 draws a 18 from deck 1 and discards a 2 to deck 2
+player 1 current hand is 21 18 14 9
+player 1 draws a 8 from deck 1 and discards a 18 to deck 2
+player 2 draws a 30 from deck 2 and discards a 13 to deck 3
+player 2 current hand is 7 16 6 30
+player 1 current hand is 21 8 14 9
+player 3 draws a 24 from deck 3 and discards a 15 to deck 4
+player 3 current hand is 24 25 11 3
+player 1 draws a 28 from deck 1 and discards a 9 to deck 2
+player 1 current hand is 21 8 14 28
+player 4 draws a 12 from deck 4 and discards a 0 to deck 1
+player 4 current hand is 29 12 4 20
+player 4 draws a 31 from deck 4 and discards a 29 to deck 1
+player 4 current hand is 31 12 4 20
+player 4 draws a 15 from deck 4 and discards a 20 to deck 1
+player 3 draws a 1 from deck 3 and discards a 24 to deck 4
+player 4 current hand is 31 12 4 15
+player 3 current hand is 1 25 11 3
+player 4 draws a 24 from deck 4 and discards a 12 to deck 1
+player 3 draws a 26 from deck 3 and discards a 1 to deck 4
+player 4 current hand is 31 24 4 15
+player 3 current hand is 26 25 11 3
+player 4 draws a 1 from deck 4 and discards a 31 to deck 1
+player 4 current hand is 1 24 4 15
+player 3 draws a 27 from deck 3 and discards a 26 to deck 4
+player 4 draws a 26 from deck 4 and discards a 24 to deck 1
+player 3 current hand is 27 25 11 3
+player 4 current hand is 1 26 4 15
+player 2 draws a 5 from deck 2 and discards a 7 to deck 3
+player 2 current hand is 5 16 6 30
+player 2 draws a 10 from deck 2 and discards a 6 to deck 3
+player 2 current hand is 5 16 10 30
+player 2 draws a 19 from deck 2 and discards a 30 to deck 3
+player 2 current hand is 5 16 10 19
+player 2 draws a 22 from deck 2 and discards a 10 to deck 3
+player 2 current hand is 5 16 22 19
+player 2 draws a 17 from deck 2 and discards a 16 to deck 3
+player 2 current hand is 5 17 22 19
+player 1 draws a 0 from deck 1 and discards a 21 to deck 2
+player 1 current hand is 0 8 14 28
+player 1 draws a 29 from deck 1 and discards a 14 to deck 2
+player 1 current hand is 0 8 29 28
+player 3 draws a 23 from deck 3 and discards a 25 to deck 4
+player 3 current hand is 27 23 11 3
+player 2 draws a 2 from deck 2 and discards a 17 to deck 3
+player 1 draws a 20 from deck 1 and discards a 28 to deck 2
+player 4 draws a 25 from deck 4 and discards a 15 to deck 1
+player 1 current hand is 0 8 29 20
+player 4 current hand is 1 26 4 25
+player 2 current hand is 5 2 22 19
+player 4 draws a 11 from deck 4 and discards a 1 to deck 1
+player 4 current hand is 11 26 4 25
+player 3 draws a 13 from deck 3 and discards a 11 to deck 4
+player 3 current hand is 27 23 13 3
+player 4 draws a 27 from deck 4 and discards a 11 to deck 1
+player 4 current hand is 27 26 4 25
+player 2 draws a 18 from deck 2 and discards a 19 to deck 3
+player 2 current hand is 5 2 22 18
+player 2 draws a 9 from deck 2 and discards a 18 to deck 3
+player 2 current hand is 5 2 22 9
+player 2 draws a 21 from deck 2 and discards a 9 to deck 3
+player 2 current hand is 5 2 22 21
+player 2 draws a 14 from deck 2 and discards a 22 to deck 3
+player 3 draws a 7 from deck 3 and discards a 27 to deck 4
+player 3 current hand is 7 23 13 3
+player 3 draws a 6 from deck 3 and discards a 23 to deck 4
+player 3 current hand is 7 6 13 3
+player 1 draws a 12 from deck 1 and discards a 0 to deck 2
+player 1 current hand is 12 8 29 20
+player 2 current hand is 5 2 14 21
+player 2 draws a 28 from deck 2 and discards a 5 to deck 3
+player 1 draws a 31 from deck 1 and discards a 12 to deck 2
+player 1 current hand is 31 8 29 20
+player 2 current hand is 28 2 14 21
+player 2 draws a 0 from deck 2 and discards a 28 to deck 3
+player 2 current hand is 0 2 14 21
+player 2 draws a 12 from deck 2 and discards a 0 to deck 3
+player 2 current hand is 12 2 14 21
+player 1 draws a 24 from deck 1 and discards a 8 to deck 2
+player 2 draws a 8 from deck 2 and discards a 12 to deck 3
+player 2 current hand is 8 2 14 21
+player 3 draws a 30 from deck 3 and discards a 13 to deck 4
+player 3 current hand is 7 6 30 3
+player 1 current hand is 31 24 29 20
+player 3 draws a 10 from deck 3 and discards a 30 to deck 4
+player 1 draws a 15 from deck 1 and discards a 20 to deck 2
+player 1 current hand is 31 24 29 15
+player 3 current hand is 7 6 10 3
+player 3 draws a 16 from deck 3 and discards a 6 to deck 4
+player 3 current hand is 7 16 10 3
+player 2 draws a 20 from deck 2 and discards a 21 to deck 3
+player 2 current hand is 8 2 14 20
+player 2 draws a 29 from deck 2 and discards a 8 to deck 3
+player 2 current hand is 29 2 14 20
+player 1 draws a 1 from deck 1 and discards a 29 to deck 2
+player 1 current hand is 31 24 1 15
+player 3 draws a 17 from deck 3 and discards a 7 to deck 4
+player 3 current hand is 17 16 10 3
+player 2 draws a 15 from deck 2 and discards a 14 to deck 3
+player 2 current hand is 29 2 15 20
+player 1 draws a 11 from deck 1 and discards a 15 to deck 2
+player 1 current hand is 31 24 1 11
+player 3 draws a 19 from deck 3 and discards a 16 to deck 4
+player 3 current hand is 17 19 10 3
+player 3 draws a 18 from deck 3 and discards a 10 to deck 4
+player 3 current hand is 17 19 18 3
+player 3 draws a 9 from deck 3 and discards a 18 to deck 4
+player 3 current hand is 17 19 9 3
+player 3 draws a 22 from deck 3 and discards a 19 to deck 4
+player 3 current hand is 17 22 9 3
+player 3 draws a 5 from deck 3 and discards a 9 to deck 4
+player 3 current hand is 17 22 5 3
+player 3 draws a 28 from deck 3 and discards a 22 to deck 4
+player 3 current hand is 17 28 5 3
+player 3 draws a 0 from deck 3 and discards a 28 to deck 4
+player 3 current hand is 17 0 5 3
+player 3 draws a 12 from deck 3 and discards a 17 to deck 4
+player 3 current hand is 12 0 5 3
+player 3 draws a 21 from deck 3 and discards a 0 to deck 4
+player 3 current hand is 12 21 5 3
+player 3 draws a 8 from deck 3 and discards a 12 to deck 4
+player 3 current hand is 8 21 5 3
+player 3 draws a 14 from deck 3 and discards a 5 to deck 4
+player 3 current hand is 8 21 14 3
 ]]></system-out>
   </testcase>
-  <testcase name="checkRandomNonPreferredDiscards" classname="CardTest" time="0.158">
+  <testcase name="checkRandomNonPreferredDiscards" classname="CardTest" time="0.126">
     <system-out><![CDATA[player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
@@ -222,28 +422,30 @@ player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
@@ -252,10 +454,6 @@ player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
@@ -264,20 +462,24 @@ player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
@@ -288,18 +490,12 @@ player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
@@ -312,22 +508,22 @@ player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
@@ -338,8 +534,10 @@ player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
@@ -348,8 +546,8 @@ player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
@@ -358,8 +556,6 @@ player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
@@ -370,26 +566,36 @@ player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
@@ -398,8 +604,12 @@ player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
@@ -424,8 +634,6 @@ player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
@@ -442,38 +650,60 @@ player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
@@ -490,10 +720,10 @@ player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
@@ -502,66 +732,36 @@ player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
-player 1 draws a 1 from deck 1 and discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
@@ -570,44 +770,39 @@ player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 6 to deck 2
 player 1 current hand is 1 1 5 1
+player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
+player 1 draws a 1 from deck 1 and discards a 6 to deck 2
+player 1 current hand is 1 1 5 1
 player 1 draws a 1 from deck 1 and discards a 5 to deck 2
 player 1 current hand is 1 1 1 6
 ]]></system-out>
   </testcase>
   <testcase name="cardsDrawnCorrectly" classname="CardTest" time="0.0"/>
   <testcase name="checkOutputTxt" classname="CardTest" time="0.0"/>
-  <testcase name="roundRobinTestPlayer" classname="CardTest" time="0.0"/>
+  <testcase name="roundRobinTestPlayer" classname="CardTest" time="0.01"/>
   <testcase name="getHandReturnsACopy" classname="CardTest" time="0.0"/>
-  <testcase name="addBottomWorks" classname="CardTest" time="0.016"/>
-  <testcase name="immediateWin" classname="CardTest" time="0.009"/>
-  <testcase name="playerCountValidation" classname="CardTest" time="0.015">
+  <testcase name="addBottomWorks" classname="CardTest" time="0.031"/>
+  <testcase name="immediateWin" classname="CardTest" time="0.008"/>
+  <testcase name="playerCountValidation" classname="CardTest" time="0.005">
     <system-out><![CDATA[Enter the number of players: Enter the number of players: Enter the number of players: Invalid number of players. Please try again.
 Enter the number of players: Enter the number of players: Invalid number of players. Please try again.
 Enter the number of players: Enter the number of players: Invalid number of players. Please try again.
 Enter the number of players: ]]></system-out>
   </testcase>
-  <testcase name="keeps4DiscardsNonPreferredCard" classname="CardTest" time="0.999">
-    <system-out><![CDATA[player 1 draws a 1 from deck 1 and discards a 6 to deck 2
-player 1 current hand is 1 1 5 1
+  <testcase name="keeps4DiscardsNonPreferredCard" classname="CardTest" time="1.006">
+    <system-out><![CDATA[player 1 draws a 1 from deck 1 and discards a 5 to deck 2
+player 1 current hand is 1 1 1 6
 ]]></system-out>
   </testcase>
-  <testcase name="fullGameTest" classname="CardTest" time="0.013">
-    <error message="deck1_output.txt" type="java.nio.file.NoSuchFileException"><![CDATA[java.nio.file.NoSuchFileException: deck1_output.txt
-	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:92)
-	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:106)
-	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
-	at java.base/sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:213)
-	at java.base/sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:244)
-	at java.base/java.nio.file.Files.newByteChannel(Files.java:357)
-	at java.base/java.nio.file.Files.newByteChannel(Files.java:399)
-	at java.base/java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:371)
-	at java.base/java.nio.file.Files.newInputStream(Files.java:154)
-	at java.base/java.nio.file.Files.newBufferedReader(Files.java:2645)
-	at java.base/java.nio.file.Files.readAllLines(Files.java:3085)
-	at java.base/java.nio.file.Files.readAllLines(Files.java:3122)
-	at CardTest.fullGameTest(CardTest.java:582)
+  <testcase name="fullGameTest" classname="CardTest" time="0.037">
+    <failure type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at CardTest.fullGameTest(CardTest.java:584)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
@@ -636,7 +831,7 @@ player 1 current hand is 1 1 5 1
 	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-]]></error>
+]]></failure>
   </testcase>
-  <testcase name="checkInvalidLines" classname="CardTest" time="0.007"/>
+  <testcase name="checkInvalidLines" classname="CardTest" time="0.011"/>
 </testsuite>

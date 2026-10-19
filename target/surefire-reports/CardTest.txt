@@ -1,22 +1,13 @@
 -------------------------------------------------------------------------------
 Test set: CardTest
 -------------------------------------------------------------------------------
-Tests run: 23, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.477 s <<< FAILURE! -- in CardTest
-CardTest.fullGameTest -- Time elapsed: 0.013 s <<< ERROR!
-java.nio.file.NoSuchFileException: deck1_output.txt
-	at java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:92)
-	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:106)
-	at java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:111)
-	at java.base/sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:213)
-	at java.base/sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:244)
-	at java.base/java.nio.file.Files.newByteChannel(Files.java:357)
-	at java.base/java.nio.file.Files.newByteChannel(Files.java:399)
-	at java.base/java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:371)
-	at java.base/java.nio.file.Files.newInputStream(Files.java:154)
-	at java.base/java.nio.file.Files.newBufferedReader(Files.java:2645)
-	at java.base/java.nio.file.Files.readAllLines(Files.java:3085)
-	at java.base/java.nio.file.Files.readAllLines(Files.java:3122)
-	at CardTest.fullGameTest(CardTest.java:582)
+Tests run: 23, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.580 s <<< FAILURE! -- in CardTest
+CardTest.fullGameTest -- Time elapsed: 0.037 s <<< FAILURE!
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at CardTest.fullGameTest(CardTest.java:584)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)

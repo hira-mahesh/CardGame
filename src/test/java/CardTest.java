@@ -581,7 +581,7 @@ public class CardTest {
             for (int d = 1; d <= n; d++) {
                 List<String> lines = Files.readAllLines(Paths.get("deck" + d + "_output.txt"));
                 assertEquals("each deck file is a single line", 1, lines.size());
-                assertTrue(lines.get(0).startsWith("deck" + d + " contents:"));
+                assertTrue(lines.get(0).startsWith("deck " + d + " contents:"));
             }
 
             // four cards per hand and conservation of cards
