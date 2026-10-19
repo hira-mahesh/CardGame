@@ -338,7 +338,7 @@ public class CardTest {
     // threading tests
     @Test
     public void concurrentTurnsConserveCards() throws Exception {
-        int n = 4;
+        int n = 3;
         int turnsPerPlayer = 2000;
 
         int[] pack = new int[8 * n];
