@@ -1,3 +1,4 @@
+player 1 initial hand 1 1 1 5
 player 1 draws a 1 from deck 1
 player 1 discards a 5 to deck 2
-player 1 current hand is 1 1 1 6
+player 1 current hand is 1 1 1 1

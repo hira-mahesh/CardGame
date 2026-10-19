@@ -35,7 +35,7 @@ public class CardDeck {
         return cards.isEmpty();
     }
     public synchronized void writeDeckToFile() { // writes deck to file
-        String fileName = "deck" + deckNum + ".txt";
+        String fileName = "deck" + deckNum + "_output.txt";
         try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
             writer.print("deck " + deckNum + " contents:");
             
