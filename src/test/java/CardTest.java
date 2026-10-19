@@ -6,15 +6,10 @@ import org.junit.rules.TemporaryFolder;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import static org.junit.Assert.*;
 
 public class CardTest {
@@ -37,7 +32,7 @@ public class CardTest {
     Path p = Files.createTempFile(directory(), "pack", ".txt");
     Files.writeString(p, sb);
     return p;
-}
+    }
 
     private Path writeRaw(String content) throws IOException { //takes string instead
         Path p = Files.createTempFile(directory(), "raw", ".txt");
@@ -45,7 +40,7 @@ public class CardTest {
         return p;
     }
 
-    private static  List<Integer> drain(CardDeck d) //gets every card from  deck and adds values in list
+    private static List<Integer> drain(CardDeck d) //gets every card from  deck and adds values in list
     {
         List<Integer> out = new ArrayList<>();
         Card c;
@@ -61,44 +56,6 @@ public class CardTest {
         for (int i = 0; i < pack.length; i++) pack[i] = 100 + i;
         return pack;
     }
-    private int[] winnablePack(int n) { //create a pack containing four cards with the same value ;helps test if a player can win
-        int[] pack = distinctPack(n);
-        pack[0] = 1; pack[n] = 1; pack[2 * n] = 1;
-        pack[4 * n] = 1;
-        return pack;
-    }
-    private void runAll(Player[] players, long timeoutMs) throws InterruptedException { //starts all the players at the same time and waits for them to finish, then checks that no threads still awake after waiting period
-        Player.resetGame();
-        Thread[] threads = new Thread[players.length];
-        for (int i = 0; i < players.length; i++) {
-            threads[i] = new Thread(players[i]);
-            threads[i].start();
-        }
-        for (Thread t : threads) {
-            t.join(timeoutMs);
-            assertFalse("a player thread did not terminate (deadlock or no clean shutdown)", t.isAlive());
-        }
-    }
-
-    private static List<Integer> handValues(Player p) { //takes players hand and returns list of values of the cards in hand.
-        List<Integer> v = new ArrayList<>();
-        for (Card c : p.getHand()) v.add(c.getValue());
-        return v;
-    }
-    private List<String> readLines(String fileName) throws IOException { //reads every line from a file in the temp directory and returns as strings
-        return Files.readAllLines(directory().resolve(fileName));
-    }
-    private static int countMatches(String text, String regex) { //counts how many times  regex matches  string
-        Matcher m = Pattern.compile(regex, Pattern.CASE_INSENSITIVE).matcher(text);
-        int c = 0;
-        while (m.find()) c++;
-        return c;
-    }
-    private static int totalInDecks(CardDeck[] ds, int i) { //the total number of cards across all the decks in CardDeck array.
-        if (i == ds.length) return 0;
-        synchronized (ds[i]) { return ds[i].getSize() + totalInDecks(ds, i + 1); }
-    }
-
 
     //tests for CardDeck class
     @Test 
