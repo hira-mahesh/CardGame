@@ -42,7 +42,7 @@ Maven shows BUILD SUCCESS if the build and tests pass. If they fail, check the t
 ## Running the game
 Compile the program first **mvn compile**
 Then run the main class from the project root **java -cp target/classes CardGame**
-Enter the number of players when prompted, followed by the path to the pack file. For example, to start a three-player game using the supplied winning pack:
+Enter the number of players when prompted, followed by the path to the pack file. To start a three-player game using the supplied winning pack:
 Enter number of players :3
 Enter the location of pack to load : winningPack3players.txt
 Enter the pack path when prompted. The two lines above are example inputs, not one command.
